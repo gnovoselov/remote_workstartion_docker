@@ -1,0 +1,19 @@
+---
+version: '3.4'
+services:
+  ubuntu-with-sshd:
+    image: "ubuntu-with-sshd:latest"
+    build:
+      context: "."
+      target: "ubuntu-with-sshd"
+    networks:
+      mynet:
+        ipv4_address: 172.16.128.2
+    ports:
+      - "2222:22"
+    privileged: true # Required for /usr/sbin/init
+networks:
+  mynet:
+    ipam:
+      config:
+        - subnet: 172.16.128.0/24
